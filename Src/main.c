@@ -59,6 +59,10 @@ static void MX_GPIO_Init(void);
 volatile uint8_t counter = 0;
 /* USER CODE END 0 */
 
+inline void toggle_led3(void){
+  HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+}
+
 /**
   * @brief  The application entry point.
   * @retval int
@@ -100,7 +104,16 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
     counter++;
-    HAL_GPIO_TogglePin(LD3_GPIO_Port, LD3_Pin);
+    
+    #ifdef HELLO_THERE
+    HAL_GPIO_WritePin(LD4_GPIO_Port,LD4_Pin, 0);
+    #endif
+
+    #ifdef GENERAL_KENOBI
+    HAL_GPIO_TogglePin(LD4_GPIO_Port,LD4_Pin);
+    #endif
+
+    toggle_led3();
     HAL_Delay(100);
   }
   /* USER CODE END 3 */
